@@ -1,0 +1,27 @@
+{
+  "name": "PricerRun",
+  "type": "object",
+  "properties": {
+    "run_key": {"type": "string", "description": "Start time of the run, to the hour, UTC. One row per run."},
+    "status": {"type": "string", "enum": ["running", "complete", "incomplete"], "enumColors": ["blue", "green", "red"], "default": "running", "description": "Where the run stands."},
+    "mode": {"type": "string", "enum": ["watch", "post"], "enumColors": ["gray", "green"], "description": "watch: prices were fetched and recorded, nothing was sent. post: prices were written to the Verifier."},
+    "started_at": {"type": "number", "description": "Epoch milliseconds the run started."},
+    "deadline_at": {"type": "number", "description": "Epoch milliseconds after which a group is no longer tried again."},
+    "finished_at": {"type": "number", "description": "Epoch milliseconds the run was closed."},
+    "assets_total": {"type": "number", "description": "Assets in the registry for this run."},
+    "groups_total": {"type": "number", "description": "Groups the assets were split into."},
+    "groups_done": {"type": "number", "description": "Groups that finished."},
+    "priced": {"type": "number", "description": "Assets that got a price."},
+    "marked_unavailable": {"type": "number", "description": "Assets that had a usable price and were marked unavailable in this run."},
+    "already_unavailable": {"type": "number", "description": "Assets with no price that were already unavailable."},
+    "fetch_errors": {"type": "number", "description": "Assets a price service failed to answer for."},
+    "transactions": {"type": "number", "description": "Transactions confirmed and read back."},
+    "alerts_sent": {"type": "array", "items": {"type": "string"}, "description": "Kinds of alert already sent for this run."},
+    "detail_removed": {"type": "boolean", "default": false, "description": "True once the per-group detail of this run has been removed."},
+    "retry_made": {"type": "boolean", "default": false, "description": "True once the groups of assets to try again have been made."},
+    "retry_groups": {"type": "number", "description": "How many groups of assets to try again were made."},
+    "retried": {"type": "number", "description": "Assets that needed another try because a price service did not answer."}
+  },
+  "required": ["run_key"],
+  "rls": {"read": {"user_condition": {"role": "admin"}}, "create": {"user_condition": {"role": "admin"}}, "update": {"user_condition": {"role": "admin"}}, "delete": {"user_condition": {"role": "admin"}}}
+}

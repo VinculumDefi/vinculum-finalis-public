@@ -1,0 +1,18 @@
+{
+  "name": "PricerState",
+  "type": "object",
+  "properties": {
+    "job_key": { "type": "string", "description": "Fixed key. One row only." },
+    "lock_token": { "type": "string", "default": "", "description": "Token of the call that is working now. Empty when none is." },
+    "lease_until": { "type": "number", "default": 0, "description": "Epoch milliseconds after which the lock may be taken by another call." },
+    "current_run_key": { "type": "string", "default": "", "description": "Key of the price run in progress. Empty when none is." },
+    "last_fetch_at": { "type": "number", "default": 0, "description": "Epoch milliseconds of the last price fetch. Used to space fetches out." },
+    "last_missed_key": { "type": "string", "description": "Key of the last run that did not start, so the alert is sent once." },
+    "created_at_ms": { "type": "number", "description": "Epoch milliseconds this row was created." },
+    "last_error": { "type": "string", "description": "Text of the last error a step stopped with." },
+    "last_error_at": { "type": "number", "description": "Epoch milliseconds of that error." },
+    "last_error_alert_at": { "type": "number", "description": "Epoch milliseconds an error alert was last sent." }
+  },
+  "required": ["job_key"],
+  "rls": { "read": { "user_condition": { "role": "admin" } }, "create": { "user_condition": { "role": "admin" } }, "update": { "user_condition": { "role": "admin" } }, "delete": { "user_condition": { "role": "admin" } } }
+}

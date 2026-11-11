@@ -1,0 +1,32 @@
+{
+  "name": "PricerGroup",
+  "type": "object",
+  "properties": {
+    "run_key": {"type": "string", "description": "The run this group belongs to."},
+    "index": {"type": "number", "description": "Position of the group in the registry order, from 0."},
+    "status": {"type": "string", "enum": ["pending", "sending", "sent", "watched", "posted", "nothing_to_post", "failed"], "enumColors": ["gray", "yellow", "blue", "gray", "green", "gray", "red"], "default": "pending", "description": "Where the group stands."},
+    "attempts": {"type": "number", "default": 0, "description": "Times this group has been worked on."},
+    "note": {"type": "string", "description": "Plain note on the last thing that happened."},
+    "results": {"type": "array", "items": {"type": "object"}, "description": "One entry per asset: the price and its source, or why there is none, and what was written."},
+    "priced": {"type": "number", "description": "Assets in the group that got a price."},
+    "marked_unavailable": {"type": "number", "description": "Assets in the group marked unavailable."},
+    "already_unavailable": {"type": "number", "description": "Assets in the group with no price that were already unavailable."},
+    "fetch_errors": {"type": "number", "description": "Assets in the group a price service failed to answer for."},
+    "tx_run_id": {"type": "string", "description": "Run number the transaction was built for."},
+    "tx_nonce": {"type": "number", "description": "Nonce the transaction was built at and must be sent at."},
+    "tx_payload_hash": {"type": "string", "description": "Fingerprint of the transaction data. Anything sent again must match it."},
+    "tx_lines": {"type": "string", "description": "The lines of the transaction, saved before it is sent."},
+    "tx_gas_limit": {"type": "string", "description": "Gas limit of the transaction."},
+    "tx_sent_at": {"type": "number", "description": "Epoch milliseconds the transaction was last sent."},
+    "tx_hash": {"type": "string", "description": "Hash of the transaction."},
+    "tx_resends": {"type": "number", "default": 0, "description": "Times the same transaction was sent again."},
+    "tx_checks": {"type": "number", "default": 0, "description": "Times the read-back did not yet match."},
+    "kind": {"type": "string", "description": "Empty for a normal group. retry: a group of assets being tried again at the end of the run."},
+    "deferred_rows": {"type": "array", "items": {"type": "number"}, "description": "Registry rows a price service did not answer for. They are tried again at the end of the run."},
+    "deferred_count": {"type": "number", "description": "How many assets were set aside to be tried again."},
+    "retry_queue": {"type": "array", "items": {"type": "object"}, "description": "Assets still to be tried again, with the number of tries so far."},
+    "retry_found": {"type": "array", "items": {"type": "object"}, "description": "Assets that got an answer when tried again."}
+  },
+  "required": ["run_key", "index"],
+  "rls": {"read": {"user_condition": {"role": "admin"}}, "create": {"user_condition": {"role": "admin"}}, "update": {"user_condition": {"role": "admin"}}, "delete": {"user_condition": {"role": "admin"}}}
+}
