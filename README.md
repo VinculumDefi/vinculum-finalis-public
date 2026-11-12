@@ -7,18 +7,25 @@ are welcome to compare any of it with what is written on chain.
 
 ## What is in here
 
+- `base/`: the verified Solidity source for the live Vinculum contracts on
+  Base, with plain file names for reading.
+- `HOW-TO-VERIFY.md`: a short guide to comparing those files with the verified
+  source on BaseScan, plus a prompt you can paste into your own AI.
 - `price-fetcher/`: the complete price fetcher for Vinculum on Base. It has
   a plain-English guide (`PRICE_FETCHER.md`), the code that runs, the tests,
   and the token list of 2,891 Base assets that it prices.
 - `registry/`: the Base asset registry document, Revision E, with all 2,893
   Base rows. The price fetcher's token list is built from it.
-- How-to manual: coming soon.
+- `docs/`: the User's Manual and the White Paper, each as a PDF and as
+  Markdown, describing how Vinculum works on Base.
 
 ## How to use it
 
 You don't need to take the team's word for anything. Give these documents to
 your own AI assistant and ask it to check the team's claims for itself:
 
+- Read the contract source in `base/` and compare it with the verified source
+  on BaseScan. The steps and a copyable prompt are in `HOW-TO-VERIFY.md`.
 - Read the price fetcher code and confirm it only fetches prices and writes
   them, as the guide says.
 - Run the tests (instructions are in `price-fetcher/PRICE_FETCHER.md`).
