@@ -540,7 +540,7 @@ Some approved tokens trade in small pools where the price can jump briefly. The 
 - Every lock's output still has to fit inside the fixed lifetime cap on Base.
 - The Verifier lets each scheduled run mark an individual asset as `usable = false`. That marks that asset unusable for new lock valuation and VCLM or CHONX minting until a later successful run. The official app does not offer a new lock on that token, while a hand-built lock transaction still routes the 5% fee and holds 95% principal and then cannot verify or mint until a usable price exists (see Section 11.6). It never affects locks that already exist.
 
-We state the remaining limit plainly: a posted price that is briefly too high could let a lock mint more VCLM than the token's usual value would, which adds to supply. That is the reason the team intends to publish the price rules for anyone to check.
+We state the remaining limit plainly: a posted price that is briefly too high could let a lock mint more VCLM than the token's usual value would, which adds to supply. That is the reason the team publishes the price rules for anyone to check.
 
 ### 11.4 Glass-Box Price Rules
 
@@ -550,7 +550,7 @@ The price-fetching rules, meaning the lookup logic without any signing key, are 
 
 **On-chain:** the price record stored in the Verifier for each asset, readable through `scheduledPrices` with the asset's key, which holds the posted USD price at 30 decimals and whether it is usable; the price bound to each lock through `lockReferencePrices`; the poster address through `scheduledPricePoster()`; and the fact that the poster can call nothing except `applyScheduledPriceRun`.
 
-**Off-chain:** whether the posted figure matches what CoinGecko or DexScreener reported at fetch time. Your AI can compare the posted price with public data for the same time and, once the price rules are published, check it against those rules.
+**Off-chain:** whether the posted figure matches what CoinGecko or DexScreener reported at fetch time. Your AI can compare the posted price with public data for the same time and check it against the price rules published in the `price-fetcher` folder of the Vinculum public verification repository.
 
 ### 11.6 A Lock Built Outside the Official App
 
