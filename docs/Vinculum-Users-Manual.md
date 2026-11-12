@@ -151,7 +151,7 @@ We make zero promises about market price or liquidity, and nobody knows in advan
 | Staking terms | 30, 60, 90, or 120 days |
 | Staking protocol fee | Zero, on every action |
 | Reward epochs | Fixed 10-day epochs from the Base launch |
-| Price schedule | Team-run price job, once every 4 days at launch |
+| Price schedule | Team-run price job, once every 24 hours |
 | Owner or rule-change control after finalization | None; narrow price-poster role in Section 11 |
 
 ## 4. Before You Sign Anything: Wallet Checking Habits
@@ -526,10 +526,10 @@ Releasing your 95% locked tokens at maturity never reads a price and never calls
 
 ### 11.2 Current Schedule and Price Rules
 
-- **Schedule.** The team sets the price schedule in the price job. At launch it runs once every 4 days. The team may change the schedule, and the official app cannot (VF-ORC-001).
+- **Schedule.** The team sets the price schedule in the price job. It currently runs once every 24 hours. The team may change the schedule, and the official app cannot (VF-ORC-001).
 - **Sources.** For each approved asset, the job takes the earliest valid price from an ordered cascade: a CoinGecko lookup by the configured ID, then a DexScreener lookup by exact contract. A lookup by ticker symbol alone is never used.
 - **No substitute price.** No hardcoded or invented price is ever used. If a run produces no valid price for an asset, the run marks that asset unusable for new lock valuation and VCLM or CHONX minting until a later successful run. The official app does not offer a new lock on that token, while a hand-built lock transaction still routes the 5% fee and holds 95% principal and then cannot verify or mint until a usable price exists (see Section 11.6; VF-ORC-004, VF-ORC-005, VF-ORC-008).
-- **No on-chain age limit.** A posted price stays in effect until the next scheduled run for that asset. At the 4-day launch schedule, a price can be up to about 4 days old when you lock, or older if a scheduled run is delayed. The app shows the exact posted price and its posting time before you sign, so you can accept it or walk away (VF-ORC-017).
+- **No on-chain age limit.** A posted price stays in effect until the next scheduled run for that asset. At the current 24-hour schedule, a price can be up to about one day old when you lock, or older if a scheduled run is delayed. The app shows the exact posted price and its posting time before you sign, so you can accept it or walk away (VF-ORC-017).
 
 ### 11.3 Thin Tokens and Brief Price Spikes
 

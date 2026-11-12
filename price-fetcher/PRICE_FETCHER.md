@@ -44,7 +44,8 @@ Price data is from CoinGecko, with DexScreener as the fallback.
 ## When it runs
 
 A run prices every asset once. A new run starts at a fixed interval that the
-team sets, between 12 hours and 7 days. Run times are counted from
+team sets, between 12 hours and 7 days. The interval is currently 24 hours.
+Run times are counted from
 2026-11-10 00:00 UTC. The interval in use is shown by the status call
 described below.
 
